@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.register-link{
+  color: #0067B4;
+}
+
 .col-4, .col-8{
   padding: 10px;
   height:  100vh;

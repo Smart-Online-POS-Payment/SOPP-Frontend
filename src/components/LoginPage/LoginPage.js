@@ -6,7 +6,8 @@ const LoginPage = () => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault(); // Prevents the default form submission behavior
     console.log("User ID:", userId);
     console.log("Password:", password);
   };
@@ -17,32 +18,43 @@ const LoginPage = () => {
         <div class="row">
           <div class="col-4 d-flex flex-column justify-content-center align-items-center">
             <div className="login-container">
-              <h2>Login</h2>
-              <div className="input-container">
-                <input
-                  class="form-control form-control-lg"
-                  type="text"
-                  placeholder="Turkish ID Number"
-                  value={userId}
-                  onChange={(e) => setUserId(e.target.value)}
-                />
-              </div>
-              <div className="input-container">
-                <input
-                  class="form-control form-control-lg"
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="button-container">
-                <button
-                  onClick={handleLogin}
-                  class="btn btn-primary form-control form-control-lg btn-action"
-                >
-                  Login
-                </button>
+              <form onSubmit={handleLogin}>
+                <h2>Login</h2>
+                <div className="input-container">
+                  <input
+                    class="form-control form-control-lg"
+                    type="text"
+                    placeholder="Email"
+                    value={userId}
+                    onChange={(e) => setUserId(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="input-container">
+                  <input
+                    class="form-control form-control-lg"
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="button-container">
+                  <button
+                    type="submit"
+                    //onClick={handleLogin}
+                    class="btn btn-primary form-control form-control-lg btn-action"
+                  >
+                    Login
+                  </button>
+                </div>
+              </form>
+
+              <div>
+                <a href="#" className="register-link">
+                  Not a member? Join SOPP
+                </a>
               </div>
             </div>
           </div>
