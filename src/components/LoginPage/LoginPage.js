@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 import {  signInWithEmailAndPassword  } from 'firebase/auth';
 import { auth } from '../firebase';
+import axios from "axios"
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +14,15 @@ const LoginPage = () => {
     await signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in
-            console.log(userCredential)
+            console.log(userCredential.user.accessToken)
+            const accessToken = userCredential.user.accessToken;
+            axios.post("http://localhost:8080/login", {
+              headers: {
+                'Authorization': `Bearer ${accessToken}`
+              },
+            }).then((response)=>{
+              console.log(response)
+            })
         })
         .catch((error) => {
           console.log("Throw error")
@@ -22,9 +31,6 @@ const LoginPage = () => {
             console.log(errorCode, errorMessage);
             // ..
         });
-
-
-
   };
 
   return (
