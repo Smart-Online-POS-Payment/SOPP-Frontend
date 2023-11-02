@@ -61,8 +61,8 @@ function RegisterPage() {
               </form>
 
               <div>
-                <a href="#" className="register-link">
-                  Not a member? Join SOPP
+                <a href="login" className="register-link">
+                  Already a member? Login to SOPP
                 </a>
               </div>
             </div>

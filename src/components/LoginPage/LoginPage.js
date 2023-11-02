@@ -67,7 +67,7 @@ const LoginPage = () => {
               </form>
 
               <div>
-                <a href="#" className="register-link">
+                <a href="register" className="register-link">
                   Not a member? Join SOPP
                 </a>
               </div>
