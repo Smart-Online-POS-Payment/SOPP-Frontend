@@ -1,37 +1,26 @@
-// Login/Login.js
 import React, { useState } from "react";
-import "./LoginPage.css";
-import {  signInWithEmailAndPassword  } from 'firebase/auth';
+import {  createUserWithEmailAndPassword  } from 'firebase/auth';
 import { auth } from '../firebase';
-import axios from "axios"
 
-const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function RegisterPage() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
-    e.preventDefault(); // Prevents the default form submission behavior
-    await signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in
-            console.log(userCredential.user.accessToken)
-            const accessToken = userCredential.user.accessToken;
-            axios.post("http://localhost:8080/login", {
-              headers: {
-                'Authorization': `Bearer ${accessToken}`
-              },
-            }).then((response)=>{
-              console.log(response)
+    const handleRegister = async (e) => {
+        e.preventDefault(); // Prevents the default form submission behavior
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                console.log(userCredential)
             })
-        })
-        .catch((error) => {
-          console.log("Throw error")
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-            // ..
-        });
-  };
+            .catch((error) => {
+              console.log("Throw error")
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+                // ..
+            });
+      };
 
   return (
     <div>
@@ -39,8 +28,8 @@ const LoginPage = () => {
         <div class="row">
           <div class="col-4 d-flex flex-column justify-content-center align-items-center">
             <div className="login-container">
-              <form onSubmit={handleLogin}>
-                <h2>Login</h2>
+              <form onSubmit={handleRegister}>
+                <h2>Register</h2>
                 <div className="input-container">
                   <input
                     class="form-control form-control-lg"
@@ -64,7 +53,6 @@ const LoginPage = () => {
                 <div className="button-container">
                   <button
                     type="submit"
-                    //onClick={handleLogin}
                     class="btn btn-primary form-control form-control-lg btn-action"
                   >
                     Login
@@ -73,8 +61,8 @@ const LoginPage = () => {
               </form>
 
               <div>
-                <a href="register" className="register-link">
-                  Not a member? Join SOPP
+                <a href="login" className="register-link">
+                  Already a member? Login to SOPP
                 </a>
               </div>
             </div>
@@ -102,4 +90,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage

@@ -1,12 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import Login from './components/LoginPage/LoginPage';
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import AppRouter from './AppRouter';
 
 
 function App() {
   return (
-    <Login></Login>
+    <AppRouter></AppRouter>
   );
 }
 
