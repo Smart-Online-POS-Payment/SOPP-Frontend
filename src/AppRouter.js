@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage'
 import RegisterPage from './components/RegisterPage/RegisterPage'
+import PaymentHistoryPage from './components/PaymentHistoryPage/PaymentHistoryPage';
 
 function AppRouter() {
   return (
@@ -10,6 +11,7 @@ function AppRouter() {
             <Route path='/' element={<LoginPage></LoginPage>}></Route>
             <Route path='/login' element={<LoginPage></LoginPage>}></Route>
             <Route path='/register' element={<RegisterPage></RegisterPage>}></Route>
+            <Route path='/home/payment-history' element={<PaymentHistoryPage></PaymentHistoryPage>}></Route>
         </Routes>
     </BrowserRouter>
   );
