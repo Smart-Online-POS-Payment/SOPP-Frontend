@@ -5,6 +5,7 @@ import RegisterPage from './components/RegisterPage/RegisterPage'
 import PaymentHistoryPage from './components/PaymentHistoryPage/PaymentHistoryPage';
 import CreatePaymentPage from './components/CreatePaymentPage/CreatePaymentPage';
 import QrCodeView from './components/CreatePaymentPage/QrCodeView';
+import HomePage from './components/HomePage/HomePage'
 
 function AppRouter() {
   return (
@@ -13,9 +14,11 @@ function AppRouter() {
             <Route path='/' element={<LoginPage></LoginPage>}></Route>
             <Route path='/login' element={<LoginPage></LoginPage>}></Route>
             <Route path='/register' element={<RegisterPage></RegisterPage>}></Route>
+            <Route path='/home' element = {<HomePage></HomePage>}></Route>
             <Route path='/home/payment-history' element={<PaymentHistoryPage></PaymentHistoryPage>}></Route>
             <Route path='/home/create-payment' element = {<CreatePaymentPage></CreatePaymentPage>}></Route>
             <Route path='/home/qr/:uuid' element = {<QrCodeView></QrCodeView>}></Route>
+            
         </Routes>
     </BrowserRouter>
   );

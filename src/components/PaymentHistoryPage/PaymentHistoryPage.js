@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { useNavigate } from 'react-router-dom';
+import { getCookie } from '../../cookie-functions';
 
 function PaymentHistoryPage() {
     const [paymentHistory, setPaymentHistory] = useState([]);
+
+    const navigate = useNavigate();
+        useEffect(() => {
+            if(!getCookie('sopp-auth')){    
+                navigate("/home");
+            }
+        },[])
 
     useEffect(() => {
         console.log("Entered")

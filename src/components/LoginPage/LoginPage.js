@@ -1,36 +1,40 @@
 // Login/Login.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginPage.css";
-import {  signInWithEmailAndPassword  } from 'firebase/auth';
-import { auth } from '../firebase';
-import axios from "axios"
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import axios from "axios";
+import { setCookie, getCookie } from "../../cookie-functions";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+        useEffect(() => {
+            if(getCookie('sopp-auth')){    
+                navigate("/home");
+            }
+        },[])
+
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
     await signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in
-            console.log(userCredential.user.accessToken)
-            const accessToken = userCredential.user.accessToken;
-            axios.post("http://localhost:8080/login", {
-              headers: {
-                'Authorization': `Bearer ${accessToken}`
-              },
-            }).then((response)=>{
-              console.log(response)
-            })
-        })
-        .catch((error) => {
-          console.log("Throw error")
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-            // ..
-        });
+      .then((userCredential) => {
+        // Signed in
+        console.log(userCredential.user.accessToken);
+        const userId = userCredential.user.uid;
+        setCookie("sopp-auth", userId, 0.5);
+        navigate("/home");      
+      })
+      .catch((error) => {
+        console.log("Throw error");
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
   };
 
   return (

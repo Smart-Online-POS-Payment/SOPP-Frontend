@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { getCookie } from '../../cookie-functions';
 
 const CreatePaymentPage = () => {
   const [paymentAmount, setPaymentAmount] = useState(0);
   const [paymentDescription, setPaymentDescription] = useState('');
+
+  const navigate = useNavigate();
+        useEffect(() => {
+            if(!getCookie('sopp-auth')){    
+                navigate("/home");
+            }
+        },[])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
