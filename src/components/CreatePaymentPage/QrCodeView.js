@@ -1,26 +1,23 @@
 import React from 'react';
 import QRCode from 'react-qr-code';
 import {useParams} from 'react-router-dom'
+import "./QRCodeView.css";
 
 function QrCodeView() {
   const data = useParams();
-  const qrcode = <QRCode value={data.uuid} size={256} />;
-
-
-  const containerStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center', // Center horizontally
-    justifyContent: 'center', // Center vertically
-    height: '100vh', // Adjust the height to your requirements
-  };
+  //const qrcode = <QRCode value={data.uuid} size={256} className="qrcode" />;
 
   return (
-    <div style={containerStyle}>
-      <h2>Make Payment</h2>
-      <div>{qrcode}</div>
+    <div className="container">
+      <div className="qrcode-container">
+        <h2 className="title">Make Payment</h2>
+        <div>
+          <QRCode value={data.uuid} size={256} className="qrcode" />
+        </div>
+      </div>
     </div>
   );
 }
 
-export default QrCodeView;
+
+export default QrCodeView;
