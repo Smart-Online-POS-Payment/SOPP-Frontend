@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getCookie, deleteCookie } from '../../cookie-functions';
 import './homepage.css'; // Ensure the CSS file is imported
 
 const HomePage = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!getCookie('sopp-auth')){    
+            navigate("/login");
+        }
+    },[])
+
     const [showMenu, setShowMenu] = useState(false);
 
     const handleCreatePayment = () => {
@@ -28,7 +36,9 @@ const HomePage = () => {
     };
 
     const handleExit = () => {
-        console.log('Exit Clicked');
+        deleteCookie('sopp-auth')
+        navigate("/login");
+        window.location.reload();
     };
 
     return (
