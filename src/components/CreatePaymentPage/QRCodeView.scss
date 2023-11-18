@@ -1,0 +1,41 @@
+$company-color: #0067B4;
+
+#qr-code-view-page {
+
+  background-color: $company-color;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .qrcode-container {
+    border: 2px solid $company-color;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+    text-align: center;
+  }
+
+  h2{
+    margin-bottom: 20px;    
+  }
+
+  .qrcode {
+    animation: fadeIn 1s ease-in-out;
+  }
+}

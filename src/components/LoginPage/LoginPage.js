@@ -1,6 +1,6 @@
 // Login/Login.js
 import React, { useState, useEffect } from "react";
-import "./LoginPage.css";
+import "./LoginPage.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import axios from "axios";
@@ -39,7 +39,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      <div class="container-fluid">
+      <div class="container-fluid" id="login-page">
         <div class="row">
           <div class="col-4 d-flex flex-column justify-content-center align-items-center">
             <div className="login-container">

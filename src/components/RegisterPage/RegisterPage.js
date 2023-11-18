@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import "./RegisterPage.css";
+import "./RegisterPage.scss";
 import { setCookie, getCookie } from "../../cookie-functions";
 import { useNavigate } from "react-router-dom";
 
@@ -40,7 +40,7 @@ function RegisterPage() {
 
   return (
     <div>
-      <div class="container-fluid">
+      <div class="container-fluid" id="register-page">
         <div class="row">
           <div className="holder d-flex flex-column justify-content-center align-items-center">
             <div className="register-form-container">

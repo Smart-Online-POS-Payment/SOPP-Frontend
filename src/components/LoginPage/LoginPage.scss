@@ -1,0 +1,58 @@
+$company-color: #0067b4;
+#login-page {
+  .login-container {
+    background-color: antiquewhite;
+    text-align: center;
+  }
+
+  .register-link {
+    color: #0067b4;
+  }
+
+  .col-4,
+  .col-8 {
+    padding: 10px;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: antiquewhite;
+  }
+
+  .input-container {
+    padding: 10px;
+  }
+
+  .button-container {
+    padding: 10px;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 10px;
+  }
+
+  .row {
+    text-align: center;
+  }
+
+  .btn {
+    width: 100%;
+    background-color: #0067b4;
+  }
+
+  .btn-action {
+    font-size: larger;
+  }
+
+  .sopp-header {
+    text-align: center;
+    color: antiquewhite;
+  }
+
+  .sopp-color {
+    background-color: #0067b4;
+  }
+
+  a {
+    color: antiquewhite;
+  }
+}

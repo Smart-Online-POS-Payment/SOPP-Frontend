@@ -1,0 +1,42 @@
+$company-color: #0067b4;
+
+#create-payment-page {
+  .create-payment-container {
+    width: 300px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border: 2px solid $company-color;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .btn {
+    width: 100%;
+    background-color: $company-color;
+  }
+
+  .btn-back {
+    background-color: aliceblue;
+  }
+
+  .input-container {
+    padding: 10px;
+  }
+  
+  .button-container {
+    padding: 10px;
+  }
+
+  .btn-action{
+    font-size:larger;
+  }
+
+  .holder {
+    padding: 10px;
+    height: 100vh;
+    margin: 0 auto;
+  }
+}
