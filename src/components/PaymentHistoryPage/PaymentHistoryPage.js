@@ -3,6 +3,7 @@ import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../cookie-functions';
+import { auth } from "../firebase";
 
 function PaymentHistoryPage() {
     const [paymentHistory, setPaymentHistory] = useState([]);
@@ -15,11 +16,20 @@ function PaymentHistoryPage() {
         },[])
 
     useEffect(() => {
-        console.log("Entered")
-        axios.get('http://localhost:8083/payment/payment-order/merchant/76519d38-0cad-42d0-be28-fded94d8f367')
+        let accessToken = getCookie('sopp-auth')
+        let merchantId = auth.currentUser.uid
+        console.log(accessToken)
+        axios.get(`http://localhost:8083/payment/payment-order/merchant/${merchantId}`, {
+          headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': 'application/json',
+          },
+        })
         .then((response) => {
-            console.log(response)
-            setPaymentHistory(response.data)
+            console.log(response.data)
+            if(response.data!=null){
+              setPaymentHistory(response.data)
+            }
         })
         .catch((error) => {
             console.error('Error fetching stories:', error);

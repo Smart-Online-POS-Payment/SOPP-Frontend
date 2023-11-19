@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { getCookie } from "../../cookie-functions";
 import "./CreatePaymentPage.scss";
+import { auth } from "../firebase";
 
 const CreatePaymentPage = () => {
   const [paymentAmount, setPaymentAmount] = useState(0);
@@ -22,22 +23,33 @@ const CreatePaymentPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let merchantId = "76519d38-0cad-42d0-be28-fded94d8f367"; // ToDO: take merchant id from cookies
+    let merchantId = auth.currentUser.uid
+    let accessToken = getCookie('sopp-auth')
     axios
-      .post("http://localhost:8083/payment/payment-request", {
-        merchantId: merchantId,
-        paymentAmount: paymentAmount,
-        paymentMessage: paymentDescription,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          // Redirect to QR page after receiving UUID
-          console.log(response.data);
-          window.location.href = "/home/qr/" + response.data;
-        } else {
-          console.error("Error creating payment request:", response.data.error);
-        }
-      });
+  .post("http://localhost:8083/payment/payment-request", {
+    merchantId: merchantId,
+    paymentAmount: paymentAmount,
+    paymentMessage: paymentDescription,
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + accessToken,
+      'Content-Type': 'application/json',
+    },
+  })
+  .then((response) => {
+    if (response.status === 200) {
+      // Redirect to QR page after receiving UUID
+      console.log(response.data);
+      window.location.href = "/home/qr/" + response.data;
+    } else {
+      console.error("Error creating payment request:", response.data.error);
+    }
+  })
+  .catch((error) => {
+    console.error("Request failed:", error);
+  });
+    
+  
   };
 
   return (

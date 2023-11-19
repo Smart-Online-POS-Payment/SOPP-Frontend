@@ -22,19 +22,16 @@ function RegisterPage() {
       .then((userCredential) => {
         // Signed in
         console.log(userCredential.user);
-        const userId = userCredential.user.uid;
-        setCookie("sopp-auth", userId, 0.5);
+        const accessToken = userCredential.user.accessToken;
+        setCookie("sopp-auth", accessToken, 0.05);
         window.location.reload();
       })
-
-      
       .catch((error) => {
         console.log("Throw error");
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         alert(error.message);
-        // ..
       });
   };
 

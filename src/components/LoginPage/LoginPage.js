@@ -24,9 +24,9 @@ const LoginPage = () => {
       .then((userCredential) => {
         // Signed in
         console.log(userCredential.user.accessToken);
-        const userId = userCredential.user.uid;
-        setCookie("sopp-auth", userId, 0.5);
-        navigate("/home");      
+        const accessToken = userCredential.user.accessToken;
+        setCookie("sopp-auth", accessToken, 0.05);
+        navigate("/home");
       })
       .catch((error) => {
         console.log("Throw error");
