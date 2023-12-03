@@ -19,7 +19,7 @@ function PaymentHistoryPage() {
         let accessToken = getCookie('sopp-auth')
         let merchantId = auth.currentUser.uid
         console.log(accessToken)
-        axios.get(`http://localhost:8083/payment/payment-order/merchant/${merchantId}`, {
+        axios.get(`http://localhost:8070/payment/payment-order/merchant/${merchantId}`, {
           headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': 'application/json',
