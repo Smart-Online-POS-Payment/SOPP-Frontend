@@ -2,7 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-
+import { getCookie } from "../cookie-functions";
+import axios from 'axios';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -19,34 +20,47 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 const messaging = getMessaging(app);
+
+const sendDeviceTokenToServer = (token)=>{
+  let accessToken = getCookie('sopp-auth')
+  let merchantId = auth.currentUser.uid
+  console.log(accessToken)
+  axios.post(`http://localhost:8070/notification/token/${token}/user/${merchantId}`, {
+    headers: {
+      'Authorization': 'Bearer ' + accessToken,
+      'Content-Type': 'application/json',
+    },
+  })
+}
+
 export const requestPermission = () => {
+  if (getCookie("sopp-auth")!=null && !getCookie("deviceToken")) {
+    console.log("Requesting User Permission......");
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        console.log("Notification User Permission Granted."); 
+        return getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
+          .then((currentToken) => {
 
-  console.log("Requesting User Permission......");
-  Notification.requestPermission().then((permission) => {
+            if (currentToken) {
+              console.log('Client Token: ', currentToken);
+              sendDeviceTokenToServer(currentToken)
+            } else {
+              
+              console.log('Failed to generate the app registration token.');
+            }
+          })
+          .catch((err) => {
 
-    if (permission === "granted") {
+            console.log('An error occurred when requesting to receive the token.', err);
+          });
+      } else {
 
-      console.log("Notification User Permission Granted."); 
-      return getToken(messaging, { vapidKey: `BHfKGJAChSTT2GzyeeLjiq6wXgtBjjQKHJlbU0APe-Ouy4sWVw9BIREQC0w-raj3Gbj7YwBwCsjspDK8kHjI6w0` })
-        .then((currentToken) => {
-
-          if (currentToken) {
-
-            console.log('Client Token: ', currentToken);
-          } else {
-            
-            console.log('Failed to generate the app registration token.');
-          }
-        })
-        .catch((err) => {
-
-          console.log('An error occurred when requesting to receive the token.', err);
-        });
-    } else {
-
-      console.log("User Permission Denied.");
-    }
-  });
+        console.log("User Permission Denied.");
+      }
+    });
+  }
+  
 
 }
 
