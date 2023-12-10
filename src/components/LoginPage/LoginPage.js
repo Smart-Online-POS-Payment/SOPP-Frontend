@@ -1,9 +1,8 @@
 // Login/Login.js
 import React, { useState, useEffect } from "react";
 import "./LoginPage.scss";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase";
-import axios from "axios";
 import { setCookie, getCookie } from "../../cookie-functions";
 import { useNavigate } from "react-router-dom";
 
@@ -24,9 +23,15 @@ const LoginPage = () => {
       .then((userCredential) => {
         // Signed in
         console.log(userCredential.user.accessToken);
-        const accessToken = userCredential.user.accessToken;
-        setCookie("sopp-auth", accessToken, 0.05);
-        navigate("/home");
+        
+        const user =  userCredential.user
+        if(user.emailVerified){
+          const accessToken = user.accessToken;
+          setCookie("sopp-auth", accessToken, 0.05);
+          navigate("/home");
+        }else{
+          alert("Verify email");
+        }
       })
       .catch((error) => {
         console.log("Throw error");

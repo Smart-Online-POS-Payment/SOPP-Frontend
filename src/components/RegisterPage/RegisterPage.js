@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase";
 import "./RegisterPage.scss";
-import { setCookie, getCookie } from "../../cookie-functions";
-import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
-        useEffect(() => {
-            if(getCookie('sopp-auth')){    
-                navigate("/home");
-            }
-        },[])
 
   const handleRegister = async (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
@@ -22,9 +14,9 @@ function RegisterPage() {
       .then((userCredential) => {
         // Signed in
         console.log(userCredential.user);
-        const accessToken = userCredential.user.accessToken;
-        setCookie("sopp-auth", accessToken, 0.05);
-        window.location.reload();
+        sendEmailVerification(userCredential.user).then(()=>{
+          alert("Verify email");
+        })
       })
       .catch((error) => {
         console.log("Throw error");
