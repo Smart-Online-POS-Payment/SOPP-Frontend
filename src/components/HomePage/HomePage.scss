@@ -1,4 +1,33 @@
 #home-page {
+  @keyframes fade-in-out {
+    0% { opacity: 0; }
+    40% { opacity: 1; }
+    60% { opacity: 1; }
+    90% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  
+  .welcome-message {
+    font-size: 40px;
+    margin-bottom: 20px;
+    animation: fade-in-out 3s;
+  }
+  
+  .welcome-message.hide {
+    display: none;
+  }
+
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .main-content {
+    opacity: 0;
+    animation: fade-in 1s forwards;
+  }
+  
+
   .container {
     display: flex;
     flex-direction: column;

@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCookie, deleteCookie } from "../../cookie-functions";
+import { auth } from "../firebase";
 import "./HomePage.scss";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [firstName, setFirstName] = useState("Test");
+  const [lastName, setLastName] = useState("Test");
 
   useEffect(() => {
     if (!getCookie("sopp-auth")) {
       navigate("/login");
+    } else {
+      setFirstName("FirstName");
+      setLastName("Lastname");
+
+      setTimeout(() => {
+        setShowWelcome(false);
+      }, 3000);
     }
-  }, []);
+  }, [navigate]);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -46,21 +57,35 @@ const HomePage = () => {
       <div id="home-page">
         <div className="container">
           <div className="main-screen">
-            <h1>Merchant Dashboard</h1>
-            <div className="menu">
-              <button onClick={handleMenuToggle}>Menu</button>
-              {showMenu && (
-                <div className="dropdown-menu">
-                  <button onClick={handleProfile}>My Profile</button>
+            {showWelcome && (
+              <div className={`welcome-message ${showWelcome ? "" : "hide"}`}>
+                Welcome, {firstName} {lastName}
+              </div>
+            )}
+            {!showWelcome && (
+              <>
+                <div className="main-content">
+                  <h1>{firstName} {lastName}'s Dashboard</h1>
+                  <div className="menu">
+                    <button onClick={handleMenuToggle}>Menu</button>
+                    {showMenu && (
+                      <div className="dropdown-menu">
+                        <button onClick={handleProfile}>My Profile</button>
+                      </div>
+                    )}
+                  </div>
+                  <div className="exit-button">
+                    <button onClick={handleExit}>Exit</button>
+                  </div>
+                  <button onClick={handleCreatePayment}>Receive Payment</button>
+                  <button onClick={handlePaymentHistory}>
+                    Payment History
+                  </button>
+                  <button onClick={handleWithdrawMoney}>Withdraw Money</button>
                 </div>
-              )}
-            </div>
-            <div className="exit-button">
-              <button onClick={handleExit}>Exit</button>
-            </div>
-            <button onClick={handleCreatePayment}>Receive Payment</button>
-            <button onClick={handlePaymentHistory}>Payment History</button>
-            <button onClick={handleWithdrawMoney}>Withdraw Money</button>
+              </>
+            )}
+            
           </div>
         </div>
       </div>
