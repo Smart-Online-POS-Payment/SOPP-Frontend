@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { auth } from "../firebase";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
+import { auth, } from "../firebase";
 import "./RegisterPage.scss";
 
 function RegisterPage() {
@@ -14,7 +14,11 @@ function RegisterPage() {
       .then((userCredential) => {
         // Signed in
         console.log(userCredential.user);
-        sendEmailVerification(userCredential.user).then(()=>{
+        const user = userCredential.user
+        updateProfile(user, {
+          displayName: "Deneme"
+        })
+        sendEmailVerification(user).then(()=>{
           alert("Verify email");
         })
       })
