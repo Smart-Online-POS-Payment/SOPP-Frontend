@@ -19,7 +19,7 @@ function RegisterPage() {
         console.log(userCredential.user);
         const user = userCredential.user
         updateProfile(user, {
-          displayName: "Deneme"
+          displayName: firstName + " " + lastName
         })
         sendEmailVerification(user).then(()=>{
           alert("Verify email");
