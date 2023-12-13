@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { auth, } from "../firebase";
 import "./RegisterPage.scss";
+import { setCookie } from "../../cookie-functions";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");

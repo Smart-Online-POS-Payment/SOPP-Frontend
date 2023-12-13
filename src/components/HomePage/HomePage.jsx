@@ -3,19 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { getCookie, deleteCookie } from "../../cookie-functions";
 import { auth } from "../firebase";
 import "./HomePage.scss";
+import getPaymentImage from "../HomePage/card_images/payment-method.png";
+import logoutImage from "../HomePage/card_images/logout.png";
+import hamburgerImage from "../HomePage/card_images/hamburger.png";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [showWelcome, setShowWelcome] = useState(true);
   const [firstName, setFirstName] = useState("Test");
   const [lastName, setLastName] = useState("Test");
+  const [userName, setUserName] = useState("Test");
 
   useEffect(() => {
     if (!getCookie("sopp-auth")) {
       navigate("/login");
     } else {
-      setFirstName("FirstName");
-      setLastName("Lastname");
+      let username = getCookie("user-displayName");
+      console.log("username: " + username);
+      setUserName(username);
 
       setTimeout(() => {
         setShowWelcome(false);
@@ -29,12 +34,12 @@ const HomePage = () => {
     navigate("/home/create-payment");
   };
 
-  const handlePaymentHistory = () => {
-    navigate("/home/payment-history");
+  const handleCard2 = () => {
+    // navigate("/home/payment-history");
   };
 
-  const handleWithdrawMoney = () => {
-    console.log("Withdraw Money Clicked");
+  const handleCard3 = () => {
+    // console.log("Withdraw Money Clicked");
   };
 
   const handleMenuToggle = () => {
@@ -59,15 +64,17 @@ const HomePage = () => {
           <div className="main-screen">
             {showWelcome && (
               <div className={`welcome-message ${showWelcome ? "" : "hide"}`}>
-                Welcome, {firstName} {lastName}
+                Welcome, {userName}
               </div>
             )}
             {!showWelcome && (
               <>
                 <div className="main-content">
-                  <h1>{firstName} {lastName}'s Dashboard</h1>
+                  <h1>{userName}'s Dashboard</h1>
                   <div className="menu">
-                    <button onClick={handleMenuToggle}>Menu</button>
+                    <button onClick={handleMenuToggle}>
+                      <img src={hamburgerImage} className="image-small"></img>
+                    </button>
                     {showMenu && (
                       <div className="dropdown-menu">
                         <button onClick={handleProfile}>My Profile</button>
@@ -75,17 +82,22 @@ const HomePage = () => {
                     )}
                   </div>
                   <div className="exit-button">
-                    <button onClick={handleExit}>Exit</button>
+                    <button onClick={handleExit}>
+                      <img src={logoutImage} className="image-small"></img>
+                    </button>
                   </div>
-                  <button onClick={handleCreatePayment}>Receive Payment</button>
-                  <button onClick={handlePaymentHistory}>
-                    Payment History
-                  </button>
-                  <button onClick={handleWithdrawMoney}>Withdraw Money</button>
+                  <div className="cards">
+                    <button onClick={handleCreatePayment} className="card">
+                      <img src={getPaymentImage} className="image"></img>
+                      <h5>Create Payment</h5>
+                    </button>
+                    
+                    <button className="card"></button>
+                    <button className="card"></button>
+                  </div>
                 </div>
               </>
             )}
-            
           </div>
         </div>
       </div>

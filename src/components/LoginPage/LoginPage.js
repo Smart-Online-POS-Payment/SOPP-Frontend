@@ -28,6 +28,7 @@ const LoginPage = () => {
         if(user.emailVerified){
           const accessToken = user.accessToken;
           setCookie("sopp-auth", accessToken, 0.05);
+          setCookie("user-displayName", user.displayName)
           navigate("/home");
         }else{
           alert("Verify email");
