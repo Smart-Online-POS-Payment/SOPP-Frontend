@@ -7,6 +7,7 @@ import CreatePaymentPage from './components/CreatePaymentPage/CreatePaymentPage'
 import QrCodeView from './components/CreatePaymentPage/QrCodeView';
 import HomePage from './components/HomePage/HomePage'
 import Notification from './components/NotificationComponents/Notification';
+import ProfilePage from './components/ProfilePage/ProfilePage';
 
 function AppRouter() {
   return (
@@ -21,6 +22,7 @@ function AppRouter() {
                 <Notification></Notification>
               </div> 
             }></Route>
+            <Route path='/home/profile' element={<ProfilePage></ProfilePage>}></Route>
             <Route path='/home/payment-history' element={<PaymentHistoryPage></PaymentHistoryPage>}></Route>
             <Route path='/home/create-payment' element = {<CreatePaymentPage></CreatePaymentPage>}></Route>
             <Route path='/home/qr/:uuid' element = {<QrCodeView></QrCodeView>}></Route>

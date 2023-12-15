@@ -4,6 +4,7 @@ import { getCookie, deleteCookie } from "../../cookie-functions";
 import { auth } from "../firebase";
 import "./HomePage.scss";
 import getPaymentImage from "../HomePage/card_images/payment-method.png";
+import getProfileImage from "../HomePage/card_images/profile.png";
 import logoutImage from "../HomePage/card_images/logout.png";
 import hamburgerImage from "../HomePage/card_images/hamburger.png";
 
@@ -49,6 +50,7 @@ const HomePage = () => {
 
   const handleProfile = () => {
     console.log("Profile Clicked"); // Placeholder for profile functionality
+    navigate("/home/profile");
   };
 
   const handleExit = () => {
@@ -91,8 +93,11 @@ const HomePage = () => {
                       <img src={getPaymentImage} className="image"></img>
                       <h5>Create Payment</h5>
                     </button>
-                    
-                    <button className="card"></button>
+
+                    <button onClick={handleProfile} className="card">
+                      <img src={getProfileImage} className="image"></img>
+                      <h5>My Profile</h5>
+                    </button>
                     <button className="card"></button>
                   </div>
                 </div>
