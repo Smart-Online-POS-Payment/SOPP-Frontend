@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getCookie, deleteCookie } from "../../cookie-functions";
 import { auth } from "../firebase";
 import getProfileImage from "../ProfilePage/src/user.png";
+import backButtonImage from "../ProfilePage/src/arrow.png";
 import logoutImage from "../HomePage/card_images/logout.png";
 import "./ProfilePage.scss";
 
@@ -14,8 +15,11 @@ const ProfilePage = () => {
     if (!getCookie("sopp-auth")) {
       navigate("/login");
     } else {
-      let username = getCookie("user-displayName");
-      setUserName(username);
+      
+      let merchantId = getCookie("userId")
+      console.log("user id is: " + merchantId);
+
+      
     }
   }, [navigate]);
 
@@ -25,9 +29,25 @@ const ProfilePage = () => {
     window.location.reload();
   };
 
+  const handleBack = () => {
+    navigate("/home");
+  };
+
   return (
     <div>
       <div id="profile-page">
+        <div className="back-button">
+          <button onClick={handleBack}>
+            <img src={backButtonImage} className="image-small"></img>
+          </button>
+        </div>
+
+        <div className="exit-button">
+          <button onClick={handleExit}>
+            <img src={logoutImage} className="image-small"></img>
+          </button>
+        </div>
+
         <div className="top-part">
           <img src={getProfileImage} className="image"></img>
         </div>

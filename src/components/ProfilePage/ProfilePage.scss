@@ -7,6 +7,22 @@ $company-color: #0067b4;
     text-align: center;
   }
 
+  .menu {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  button {
+    margin: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
   .image {
     width: 150px;
     margin: auto 0;
@@ -15,6 +31,11 @@ $company-color: #0067b4;
     position: relative;
     margin-top: 40px;
     top: 40px;
+  }
+
+  .image-small {
+    width: 40px;
+    height: auto;
   }
 
   .bottom-part {
@@ -38,5 +59,25 @@ $company-color: #0067b4;
 
   .input-container {
     padding: 10px;
+  }
+
+  .exit-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    button {
+      background-color: antiquewhite;
+    }
+  }
+
+  .back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    button {
+      background-color: antiquewhite;
+    }
   }
 }
