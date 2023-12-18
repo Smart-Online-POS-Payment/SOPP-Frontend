@@ -7,6 +7,7 @@ import getPaymentImage from "../HomePage/card_images/payment-method.png";
 import getProfileImage from "../HomePage/card_images/profile.png";
 import logoutImage from "../HomePage/card_images/logout.png";
 import hamburgerImage from "../HomePage/card_images/hamburger.png";
+import dashboardImage from "../HomePage/card_images/dashboard.png"
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -51,6 +52,10 @@ const HomePage = () => {
   const handleProfile = () => {
     console.log("Profile Clicked"); // Placeholder for profile functionality
     navigate("/home/profile");
+  };
+
+  const handleDashboard = () => {
+    navigate("/home/dashboard");
   };
 
   const handleExit = () => {
@@ -98,7 +103,10 @@ const HomePage = () => {
                       <img src={getProfileImage} className="image"></img>
                       <h5>My Profile</h5>
                     </button>
-                    <button className="card"></button>
+                    <button onClick={handleDashboard} className="card">
+                      <img src={dashboardImage} className="image"></img>
+                      <h5>Dashboard</h5>
+                    </button>
                   </div>
                 </div>
               </>

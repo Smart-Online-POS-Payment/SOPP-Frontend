@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { getCookie } from "../../cookie-functions";
 import "./CreatePaymentPage.scss";
 import { auth } from "../firebase";
+import downArrow from "../CreatePaymentPage/src/down-arrow.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CreatePaymentPage = () => {
   const [paymentAmount, setPaymentAmount] = useState(0);
@@ -19,37 +21,39 @@ const CreatePaymentPage = () => {
 
   const goBack = () => {
     navigate("/home");
-  }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let merchantId = auth.currentUser.uid
-    let accessToken = getCookie('sopp-auth')
+    let merchantId = auth.currentUser.uid;
+    let accessToken = getCookie("sopp-auth");
     axios
-  .post("http://localhost:8083/payment/payment-request", {
-    merchantId: merchantId,
-    paymentAmount: paymentAmount,
-    paymentMessage: paymentDescription,
-  }, {
-    headers: {
-      'Authorization': 'Bearer ' + accessToken,
-      'Content-Type': 'application/json',
-    },
-  })
-  .then((response) => {
-    if (response.status === 200) {
-      // Redirect to QR page after receiving UUID
-      console.log(response.data);
-      window.location.href = "/home/qr/" + response.data;
-    } else {
-      console.error("Error creating payment request:", response.data.error);
-    }
-  })
-  .catch((error) => {
-    console.error("Request failed:", error);
-  });
-    
-  
+      .post(
+        "http://localhost:8083/payment/payment-request",
+        {
+          merchantId: merchantId,
+          paymentAmount: paymentAmount,
+          paymentMessage: paymentDescription,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          // Redirect to QR page after receiving UUID
+          console.log(response.data);
+          window.location.href = "/home/qr/" + response.data;
+        } else {
+          console.error("Error creating payment request:", response.data.error);
+        }
+      })
+      .catch((error) => {
+        console.error("Request failed:", error);
+      });
   };
 
   return (
@@ -69,6 +73,28 @@ const CreatePaymentPage = () => {
                     onChange={(e) => setPaymentAmount(e.target.value)}
                     required
                   />
+                </div>
+
+                <div className="input-container">
+                  {/* <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg> */}
+                  <select
+                    id="dropdown"
+                    name="dropdown"
+                    className="form-control form-control-lg"
+                  >
+                    <option selected>Choose Category</option>
+
+                    <option value="Clothing">Clothing</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Tickets">Tickets</option>
+                    <option value="CarRentals">Car Rentals</option>
+                    <option value="Restaurants">Restaurants</option>
+                    <option value="Coffee">Coffee</option>
+                    <option value="Charity">Charity</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
 
                 <div className="input-container">
@@ -92,7 +118,7 @@ const CreatePaymentPage = () => {
                 </div>
                 <div className="button-container">
                   <button
-                  onClick={goBack}
+                    onClick={goBack}
                     type="button"
                     class="btn btn-light btn-back form-control form-control-lg btn-action"
                   >

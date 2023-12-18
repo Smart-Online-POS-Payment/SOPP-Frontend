@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../cookie-functions';
 import { auth } from "../firebase";
 
-function PaymentHistoryPage() {
+function DashboardPage() {
     const [paymentHistory, setPaymentHistory] = useState([]);
 
     const navigate = useNavigate();
@@ -39,7 +39,7 @@ function PaymentHistoryPage() {
 
   return (
     <div>
-    <h2>Payment History</h2>
+    <h2>Dashboard</h2>
     <ListGroup as="ol" numbered>
       {paymentHistory.map((entry, index) => (
         <ListGroup.Item
@@ -61,4 +61,4 @@ function PaymentHistoryPage() {
   )
 }
 
-export default PaymentHistoryPage
+export default DashboardPage
