@@ -6,22 +6,51 @@ import getProfileImage from "../ProfilePage/src/user.png";
 import backButtonImage from "../ProfilePage/src/arrow.png";
 import logoutImage from "../HomePage/card_images/logout.png";
 import "./ProfilePage.scss";
+import axios from 'axios';
+
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("Test");
+  const [URL, setURL] = useState("Empty");
+
+  const customerId = 123; // Replace with your actual customer ID
+  const apiUrl = `http://localhost:8081/verify/customer/${customerId}`;
 
   useEffect(() => {
     if (!getCookie("sopp-auth")) {
       navigate("/login");
     } else {
-      
-      let merchantId = getCookie("userId")
+      let merchantId = getCookie("userId");
       console.log("user id is: " + merchantId);
-
-      
     }
   }, [navigate]);
+
+  useEffect(() => {
+    if (!getCookie("sopp-auth")) {
+      navigate("/login");
+    } else {
+      let merchantId = getCookie("userId");
+      console.log("user id is: " + merchantId);
+    }
+    let accessToken = getCookie('sopp-auth')
+    console.log(auth.currentUser)
+    let merchantId = getCookie("userId")
+    console.log(accessToken)
+    let apiURL = "http://localhost:8081/verify/customer/" + merchantId;
+    setURL(apiURL);
+    axios.get(URL)
+    .then((response) => {
+        console.log(response.data)
+        if(response.data!=null){
+          console.log("success")
+        }
+    })
+    .catch((error) => {
+        console.error('Error fetching stories:', error);
+    });
+}, []);
+
 
   const handleExit = () => {
     deleteCookie("sopp-auth");
