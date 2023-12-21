@@ -11,11 +11,7 @@ import axios from 'axios';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const [userName, setUserName] = useState("Test");
-  const [URL, setURL] = useState("Empty");
-
-  const customerId = 123; // Replace with your actual customer ID
-  const apiUrl = `http://localhost:8081/verify/customer/${customerId}`;
+  const [userProfile, setUserProfile] = useState();
 
   useEffect(() => {
     if (!getCookie("sopp-auth")) {
@@ -28,13 +24,13 @@ const ProfilePage = () => {
     console.log(auth.currentUser)
     let merchantId = getCookie("userId")
     console.log(accessToken)
-    let apiURL = "http://localhost:8081/verify/customer/" + merchantId;
-    setURL(apiURL);
-    axios.get(URL)
+    let apiURL = `http://localhost:8081/verify/customer/${merchantId}` ;
+    axios.get(apiURL)
     .then((response) => {
         console.log(response.data)
         if(response.data!=null){
           console.log("success")
+          setUserProfile(response.data)
         }
     })
     .catch((error) => {
@@ -78,40 +74,36 @@ const ProfilePage = () => {
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder="TCKN"
+                placeholder={userProfile ? userProfile.firstname : 'Name...'}
                 required
+                disabled
               />
             </div>
             <div className="input-container">
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder="Name"
+                placeholder={userProfile ? userProfile.surname : 'Surname...'}
                 required
+                disabled
               />
             </div>
             <div className="input-container">
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder="Surname"
+                placeholder={userProfile ? userProfile.phoneNumber : 'PhoneNumber...'}
                 required
+                disabled
               />
             </div>
             <div className="input-container">
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder="Tax Number"
+                placeholder={userProfile ? userProfile.openAddress : 'OpenAddress...'}
                 required
-              />
-            </div>
-            <div className="input-container">
-              <input
-                class="form-control form-control-lg"
-                type="text"
-                placeholder="Adress"
-                required
+                disabled
               />
             </div>
           </div>
