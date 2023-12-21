@@ -24,15 +24,6 @@ const ProfilePage = () => {
       let merchantId = getCookie("userId");
       console.log("user id is: " + merchantId);
     }
-  }, [navigate]);
-
-  useEffect(() => {
-    if (!getCookie("sopp-auth")) {
-      navigate("/login");
-    } else {
-      let merchantId = getCookie("userId");
-      console.log("user id is: " + merchantId);
-    }
     let accessToken = getCookie('sopp-auth')
     console.log(auth.currentUser)
     let merchantId = getCookie("userId")
