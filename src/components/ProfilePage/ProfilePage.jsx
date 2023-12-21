@@ -6,8 +6,7 @@ import getProfileImage from "../ProfilePage/src/user.png";
 import backButtonImage from "../ProfilePage/src/arrow.png";
 import logoutImage from "../HomePage/card_images/logout.png";
 import "./ProfilePage.scss";
-import axios from 'axios';
-
+import axios from "axios";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -20,23 +19,24 @@ const ProfilePage = () => {
       let merchantId = getCookie("userId");
       console.log("user id is: " + merchantId);
     }
-    let accessToken = getCookie('sopp-auth')
-    console.log(auth.currentUser)
-    let merchantId = getCookie("userId")
-    console.log(accessToken)
-    let apiURL = `http://localhost:8081/verify/customer/${merchantId}` ;
-    axios.get(apiURL)
-    .then((response) => {
-        console.log(response.data)
-        if(response.data!=null){
-          console.log("success")
-          setUserProfile(response.data)
+    let accessToken = getCookie("sopp-auth");
+    console.log(auth.currentUser);
+    let merchantId = getCookie("userId");
+    console.log(accessToken);
+    let apiURL = `http://localhost:8081/verify/customer/${merchantId}`;
+    axios
+      .get(apiURL)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data != null) {
+          console.log("success");
+          setUserProfile(response.data);          
         }
-    })
-    .catch((error) => {
-        console.error('Error fetching stories:', error);
-    });
-}, []);
+      })
+      .catch((error) => {
+        console.error("Error fetching stories:", error);
+      });
+  }, []);
 
 
   const handleExit = () => {
@@ -74,37 +74,37 @@ const ProfilePage = () => {
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder={userProfile ? userProfile.firstname : 'Name...'}
+                placeholder={userProfile ? userProfile.firstname : "Name..."}
                 required
-                disabled
+                readOnly
               />
             </div>
             <div className="input-container">
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder={userProfile ? userProfile.surname : 'Surname...'}
+                placeholder={userProfile ? userProfile.surname : "Surname..."}
                 required
-                disabled
+                readOnly
               />
             </div>
             <div className="input-container">
               <input
                 class="form-control form-control-lg"
                 type="text"
-                placeholder={userProfile ? userProfile.phoneNumber : 'PhoneNumber...'}
+                placeholder={
+                  userProfile ? userProfile.phoneNumber : "PhoneNumber..."
+                }
                 required
-                disabled
+                readOnly
               />
             </div>
-            <div className="input-container">
-              <input
-                class="form-control form-control-lg"
-                type="text"
-                placeholder={userProfile ? userProfile.openAddress : 'OpenAddress...'}
-                required
-                disabled
-              />
+            <div className="input-container">              
+              <textarea className="form-control form-control-lg"                
+                value={userProfile ? userProfile.openAddress : "PhoneNumber..."}
+                rows="4"                
+                readOnly
+              ></textarea>
             </div>
           </div>
         </div>
