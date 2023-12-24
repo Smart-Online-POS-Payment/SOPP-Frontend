@@ -3,44 +3,13 @@ import axios from "axios";
 import { ListGroup, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../cookie-functions";
-import { auth } from "../firebase";
 import "../DashboardPage/DashboardPage.scss";
-import moment from 'moment';
 
 function DashboardPage() {
   const [paymentHistory, setPaymentHistory] = useState([]);
   const [showTextField, setShowTextField] = useState(false);
   // const [clickedRowIndex, setClickedRowIndex] = useState(null);
 
-  const handleButtonClick = (index) => {
-    console.log("clickedRowIndex is: " + index);
-  };
-
-  const getRandomNumber = () => {
-    const min = 50;
-    const max = 100;
-    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-    return "Amount: " + Math.floor(randomNumber / 5) * 5;
-  };
-
-  const getCategory = () => {
-    const categories = [
-      "Groceries",
-      "Clothing",
-      "Electronics",
-      "Tickets",
-      "CarRentals",
-      "Restaurants",
-      "Coffee",
-      "Charity",
-      "Rent",
-      "Gaming",
-      "Other",
-    ];
-
-    const randomIndex = Math.floor(Math.random() * categories.length);
-    return "Category: " + categories[randomIndex];
-  };
 
   function toggleDisplayById(id) {
     const elementId = "text-field-" + id;
@@ -68,7 +37,6 @@ function DashboardPage() {
     let api =
       "http://localhost:8083/payment/payment-order/merchant/" +
       getCookie("userId");
-    console.log("request from: " + api);
 
     axios
       .get(api, {
@@ -89,30 +57,14 @@ function DashboardPage() {
       });
   }, []);
 
-  const generateMockData = () => {
-    const mockData = [];
-
-    for (let i = 1; i <= 50; i++) {
-      mockData.push([
-        getRandomNumber(),
-        getCategory(),
-        "Time: " + moment().format("HH:mm:ss"), // Format the current time
-        "Forgot",
-      ]);
-    }
-
-    return mockData;
-  };
-
-  const mockData = generateMockData();
 
   return (
     <div>
       <div id="payment-history-page">
         <div className="container">
           <ListGroup style={{ display: "flex", flexDirection: "column" }}>
-            {mockData.map((innerArray, outerIndex) => (
-              <div key={outerIndex} style={{ position: "relative" }}>
+            {paymentHistory.map((paymentItem, index) => (
+              <div key={index} style={{ position: "relative" }}>
                 <ListGroup.Item
                   style={{
                     display: "flex",
@@ -121,26 +73,26 @@ function DashboardPage() {
                     alignItems: "center",
                   }}
                 >
-                  {innerArray.map((str, innerIndex) => (
+                  {Object.values(paymentItem).map((value, innerIndex) => (
                     <span key={innerIndex}>
-                      {innerIndex === innerArray.length - 1 ? (
+                      {innerIndex === Object.values(paymentItem).length - 1 ? (
                         <Button
                           variant="primary"
-                          onClick={() => toggleDisplayById(outerIndex)}
+                          onClick={() => toggleDisplayById(index)}
                         >
-                          Detail: {outerIndex}
+                          Detail: {index}
                         </Button>
                       ) : (
-                        str
+                        value
                       )}
                     </span>
                   ))}
                 </ListGroup.Item>
-
+  
                 <textarea
-                  id={`text-field-${outerIndex}`}
+                  id={`text-field-${index}`}
                   className="form-control form-control-lg"
-                  value={"Mock detail for mock item no: " + outerIndex}
+                  value={paymentItem.date}
                   rows="1"
                   readOnly
                   style={{
@@ -153,7 +105,7 @@ function DashboardPage() {
         </div>
       </div>
     </div>
-  );
+  );  
 }
 
 export default DashboardPage;

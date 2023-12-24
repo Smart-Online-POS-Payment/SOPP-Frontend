@@ -1,7 +1,7 @@
 // Login/Login.js
 import React, { useState, useEffect } from "react";
 import "./LoginPage.scss";
-import { signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { signInWithEmailAndPassword} from "firebase/auth";
 import { auth } from "../firebase";
 import { setCookie, getCookie } from "../../cookie-functions";
 import { useNavigate } from "react-router-dom";
@@ -93,22 +93,12 @@ const LoginPage = () => {
           <div class="col-8 sopp-color d-flex flex-column justify-content-center align-items-center">
             <div class="sopp-header">
               <h1>SOPP: Smart Online POS Payment</h1>
-              <h3>Making Online Banking Easier</h3>
-
+              <h3>Making Online Payment Easier</h3>
               <a href="#details">Learn More about SOPP</a>
             </div>
           </div>
         </div>
       </div>
-      <h1 id="details">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum."
-      </h1>
     </div>
   );
 };
