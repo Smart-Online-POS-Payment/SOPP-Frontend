@@ -4,12 +4,16 @@ import { ListGroup, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../cookie-functions";
 import "../DashboardPage/DashboardPage.scss";
+import { PieChart } from "@mui/x-charts/PieChart";
+import { useDrawingArea } from "@mui/x-charts/hooks";
+import { styled } from "@mui/material/styles";
+import refundImage from "../DashboardPage/card_images/refund.png";
+import transactionsImage from "../DashboardPage/card_images/transaction.png";
 
 function DashboardPage() {
   const [paymentHistory, setPaymentHistory] = useState([]);
   const [showTextField, setShowTextField] = useState(false);
   // const [clickedRowIndex, setClickedRowIndex] = useState(null);
-
 
   function toggleDisplayById(id) {
     const elementId = "text-field-" + id;
@@ -23,12 +27,49 @@ function DashboardPage() {
     }
   }
 
+  const handlePaymentHistory = () => {
+    navigate("/home/payment-history");
+  };
+
+  const handleRefundRequests = () => {
+    navigate("/home/refund-requests");
+  };
+
   const navigate = useNavigate();
   useEffect(() => {
     if (!getCookie("sopp-auth")) {
       navigate("/home");
     }
   }, []);
+
+  const data = [
+    { value: 1550, label: "Electronics" },
+    { value: 1000, label: "Charity" },
+    { value: 150, label: "Coffee" },
+    { value: 450, label: "Other" },
+    { value: 1000, label: "Gaming" },
+  ];
+
+  const size = {
+    width: 600,
+    height: 600,
+  };
+
+  const StyledText = styled("text")(({ theme }) => ({
+    fill: theme.palette.text.primary,
+    textAnchor: "middle",
+    dominantBaseline: "central",
+    fontSize: 20,
+  }));
+
+  function PieCenterLabel({ children }) {
+    const { width, height, left, top } = useDrawingArea();
+    return (
+      <StyledText x={left + width / 2} y={top + height / 2}>
+        {children}
+      </StyledText>
+    );
+  }
 
   useEffect(() => {
     let accessToken = getCookie("sopp-auth");
@@ -57,55 +98,57 @@ function DashboardPage() {
       });
   }, []);
 
-
   return (
     <div>
-      <div id="payment-history-page">
+      <div id="dashboard-page">
         <div className="container">
-          <ListGroup style={{ display: "flex", flexDirection: "column" }}>
-            {paymentHistory.map((paymentItem, index) => (
-              <div key={index} style={{ position: "relative" }}>
-                <ListGroup.Item
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                    alignItems: "center",
-                  }}
-                >
-                  {Object.values(paymentItem).map((value, innerIndex) => (
-                    <span key={innerIndex}>
-                      {innerIndex === Object.values(paymentItem).length - 1 ? (
-                        <Button
-                          variant="primary"
-                          onClick={() => toggleDisplayById(index)}
-                        >
-                          Detail: {index}
-                        </Button>
-                      ) : (
-                        value
-                      )}
-                    </span>
-                  ))}
-                </ListGroup.Item>
-  
-                <textarea
-                  id={`text-field-${index}`}
-                  className="form-control form-control-lg"
-                  value={paymentItem.date}
-                  rows="1"
-                  readOnly
-                  style={{
-                    display: "none",
-                  }}
-                ></textarea>
+          {/* <h1>Dashboard</h1> */}
+
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-8 d-flex flex-column justify-content-center align-items-center">
+                <div className="pie-chart-container">
+                  <PieChart
+                    colors={["cyan", "navy", "grey"]}
+                    series={[
+                      {
+                        data,
+                        innerRadius: 80,
+                        outerRadius: 200,
+                        paddingAngle: 5,
+                        cornerRadius: 5,
+                        startAngle: 0,
+                        endAngle: 360,
+                      },
+                    ]}
+                    {...size}
+                  >
+                    <PieCenterLabel>Sales</PieCenterLabel>
+                  </PieChart>
+                </div>
               </div>
-            ))}
-          </ListGroup>
+
+              <div className="col-4 d-flex flex-column justify-content-center align-items-center">
+                <div className="cards-container">
+                  <div className="cards">
+                    <button onClick={handlePaymentHistory} className="card">
+                      <img src={transactionsImage} className="image"></img>
+                      <h5>Payment History</h5>
+                    </button>
+
+                    <button onClick={handleRefundRequests} className="card">
+                      <img src={refundImage} className="image"></img>
+                      <h5>Refund Requests</h5>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  );  
+  );
 }
 
 export default DashboardPage;

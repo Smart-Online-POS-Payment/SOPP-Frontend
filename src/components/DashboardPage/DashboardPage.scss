@@ -1,7 +1,53 @@
-#payment-history-page {
-    padding: 120px;
-    .container{
-        
-        
+$company-color: #0067b4;
+#dashboard-page {
+  height: 100vh;
+  .container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .pie-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    width: 100vh;
+    height: 700px;
+  }
+
+  .chart {
+    width: 100%;
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    button {
+      background-color: $company-color;
+      h5 {
+        color: black;
+      }
     }
+  }
+
+  .card {
+    width: 150px;
+    height: 200px;
+    background-color: #007bff;
+    //display: inline-block;
+    display: grid;
+    transition: transform 0.3s ease;
+
+    .image {
+      width: 70%;
+      height: auto;
+      margin: 0 auto;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      padding: 0;
+      border: 0;
+    }
+  }
 }

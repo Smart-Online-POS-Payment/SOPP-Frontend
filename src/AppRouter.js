@@ -8,6 +8,8 @@ import QrCodeView from './components/CreatePaymentPage/QrCodeView';
 import HomePage from './components/HomePage/HomePage'
 import Notification from './components/NotificationComponents/Notification';
 import ProfilePage from './components/ProfilePage/ProfilePage';
+import PaymentHistoryPage from './components/PaymentHistoryPage/PaymentHistoryPage';
+import RefundRequestsPage from './components/RefundRequestPage/RefundRequestsPage';
 
 function AppRouter() {
   return (
@@ -24,6 +26,8 @@ function AppRouter() {
             }></Route>
             <Route path='/home/profile' element={<ProfilePage></ProfilePage>}></Route>
             <Route path='/home/dashboard' element={<DashboardPage></DashboardPage>}></Route>
+            <Route path='/home/payment-history' element={<PaymentHistoryPage></PaymentHistoryPage>}></Route>
+            <Route path='/home/refund-requests' element={<RefundRequestsPage></RefundRequestsPage>}></Route>
             <Route path='/home/create-payment' element = {<CreatePaymentPage></CreatePaymentPage>}></Route>
             <Route path='/home/qr/:uuid' element = {<QrCodeView></QrCodeView>}></Route>
             

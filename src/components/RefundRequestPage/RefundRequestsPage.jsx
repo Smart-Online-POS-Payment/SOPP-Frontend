@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { getCookie } from '../../cookie-functions';
 import { auth } from "../firebase";
 
-function RefundRequestPage() {
+function RefundRequestsPage() {
     const [refundRequests, setRefundRequests] = useState([]);
 
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ function RefundRequestPage() {
         let accessToken = getCookie('sopp-auth')
         let merchantId = auth.currentUser.uid
         console.log(accessToken)
-        axios.get(`http://localhost:8070/payment/refund/merchant/${merchantId}`, {
+        axios.get(`http://localhost:8083/payment/refund/merchant/${merchantId}`, {
           headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': 'application/json',
@@ -46,4 +46,4 @@ function RefundRequestPage() {
   )
 }
 
-export default RefundRequestPage
+export default RefundRequestsPage
