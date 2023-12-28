@@ -1,12 +1,16 @@
 $company-color: #0067b4;
+$sopp-primary: #5dc9e9;
+$sopp-secondary: #163a62;
+$sopp-alternative: #2b6387;
+$sopp-white: #ffffff;
 #login-page {
   .login-container {
-    background-color: antiquewhite;
+    background-color: $sopp-primary;
     text-align: center;
   }
 
   .register-link {
-    color: #0067b4;
+    color: $sopp-alternative;
   }
 
   .col-4,
@@ -14,7 +18,7 @@ $company-color: #0067b4;
     padding: 10px;
     height: 100vh;
     margin: 0 auto;
-    background-color: antiquewhite;
+    background-color: $sopp-primary;
   }
 
   .input-container {
@@ -36,7 +40,8 @@ $company-color: #0067b4;
 
   .btn {
     width: 100%;
-    background-color: #0067b4;
+    background-color: $sopp-alternative;
+    border: none;
   }
 
   .btn-action {
@@ -45,14 +50,14 @@ $company-color: #0067b4;
 
   .sopp-header {
     text-align: center;
-    color: antiquewhite;
+    color: $sopp-white;
   }
 
   .sopp-color {
-    background-color: #0067b4;
+    background-color: $sopp-alternative;
   }
 
   a {
-    color: antiquewhite;
+    color: $sopp-white;
   }
 }

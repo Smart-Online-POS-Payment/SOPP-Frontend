@@ -1,12 +1,15 @@
 $company-color: #0067b4;
+$sopp-primary: #5dc9e9;
+$sopp-secondary: #163a62;
+$sopp-alternative: #2b6387;
+$sopp-white: #ffffff;
 #dashboard-page {
   height: 100vh;
-  .container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  background-color: $sopp-primary;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .pie-chart-container {
     display: flex;
     justify-content: center;
@@ -22,23 +25,42 @@ $company-color: #0067b4;
   .cards {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
 
     button {
-      background-color: $company-color;
+      background-color: $sopp-primary;
       h5 {
-        color: black;
+        color: $sopp-alternative;
       }
+    }
+  }
+
+  .image-small {
+    width: 40px;
+    height: auto;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    button {
+      background-color: $sopp-primary;
+      width: 50px;
+      height: 50px;
+      border: none;
     }
   }
 
   .card {
     width: 150px;
     height: 200px;
-    background-color: #007bff;
-    //display: inline-block;
+    background-color: $sopp-white;
+    border: 3px solid $sopp-alternative;
     display: grid;
     transition: transform 0.3s ease;
+    margin-right: 150px;
 
     .image {
       width: 70%;
@@ -49,5 +71,9 @@ $company-color: #0067b4;
       padding: 0;
       border: 0;
     }
+  }
+
+  .card:hover {
+    transform: scale(1.1);
   }
 }

@@ -36,14 +36,6 @@ const HomePage = () => {
     navigate("/home/create-payment");
   };
 
-  const handleCard2 = () => {
-    // navigate("/home/payment-history");
-  };
-
-  const handleCard3 = () => {
-    // console.log("Withdraw Money Clicked");
-  };
-
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
     console.log("Menu Toggled", !showMenu); // This will log the new state
@@ -78,7 +70,7 @@ const HomePage = () => {
               <>
                 <div className="main-content">
                   <h1>{userName}'s Dashboard</h1>
-                  <div className="menu">
+                  {/* <div className="menu">
                     <button onClick={handleMenuToggle}>
                       <img src={hamburgerImage} className="image-small"></img>
                     </button>
@@ -87,7 +79,7 @@ const HomePage = () => {
                         <button onClick={handleProfile}>My Profile</button>
                       </div>
                     )}
-                  </div>
+                  </div> */}
                   <div className="exit-button">
                     <button onClick={handleExit}>
                       <img src={logoutImage} className="image-small"></img>

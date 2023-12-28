@@ -9,6 +9,7 @@ import { useDrawingArea } from "@mui/x-charts/hooks";
 import { styled } from "@mui/material/styles";
 import refundImage from "../DashboardPage/card_images/refund.png";
 import transactionsImage from "../DashboardPage/card_images/transaction.png";
+import backButtonImage from "../ProfilePage/src/arrow.png";
 
 function DashboardPage() {
   const [paymentHistory, setPaymentHistory] = useState([]);
@@ -26,6 +27,10 @@ function DashboardPage() {
         element.style.display === "none" ? "block" : "none";
     }
   }
+
+  const handleBack = () => {
+    navigate("/home");
+  };
 
   const handlePaymentHistory = () => {
     navigate("/home/payment-history");
@@ -51,8 +56,8 @@ function DashboardPage() {
   ];
 
   const size = {
-    width: 600,
-    height: 600,
+    width: 700,
+    height: 700,
   };
 
   const StyledText = styled("text")(({ theme }) => ({
@@ -101,7 +106,12 @@ function DashboardPage() {
   return (
     <div>
       <div id="dashboard-page">
-        <div className="container">
+        <div className="back-button">
+          <button onClick={handleBack}>
+            <img src={backButtonImage} className="image-small"></img>
+          </button>
+        </div>
+        
           {/* <h1>Dashboard</h1> */}
 
           <div className="container-fluid">
@@ -109,7 +119,18 @@ function DashboardPage() {
               <div className="col-8 d-flex flex-column justify-content-center align-items-center">
                 <div className="pie-chart-container">
                   <PieChart
-                    colors={["cyan", "navy", "grey"]}
+                    colors = {[                      
+                      "#ffb74d",
+                      "#66bb6a",
+                      "#ef5350",
+                      "#9575cd",
+                      "#ff8a80",
+                      "#ffd54f",
+                      "#66bb6a",
+                      "#ffeb3b",
+                      "#90a4ae",
+                      "#4caf50"
+                    ]}
                     series={[
                       {
                         data,
@@ -145,7 +166,7 @@ function DashboardPage() {
               </div>
             </div>
           </div>
-        </div>
+        
       </div>
     </div>
   );

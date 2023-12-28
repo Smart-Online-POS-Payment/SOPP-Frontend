@@ -1,6 +1,10 @@
 $company-color: #0067b4;
-
+$sopp-primary: #5dc9e9;
+$sopp-secondary: #163a62;
+$sopp-alternative: #2b6387;
+$sopp-white: #ffffff;
 #create-payment-page {
+  background-color: $sopp-primary;
   .create-payment-container {
     width: 300px;
     text-align: center;
@@ -8,18 +12,20 @@ $company-color: #0067b4;
     border-radius: 20px;
     padding-bottom: 20px;
     padding-top: 20px;
-    border: 2px solid $company-color;
+    border: 2px solid $sopp-alternative;
     padding-left: 15px;
     padding-right: 15px;
   }
 
   .btn {
     width: 100%;
-    background-color: $company-color;
+    background-color: $sopp-alternative;
+    border: none;
   }
 
   .btn-back {
-    background-color: aliceblue;
+    background-color: $sopp-white;
+    color: $sopp-alternative;
   }
 
   .input-container {

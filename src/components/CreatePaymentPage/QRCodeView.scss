@@ -1,8 +1,11 @@
-$company-color: #0067B4;
-
+$company-color: #0067b4;
+$sopp-primary: #5dc9e9;
+$sopp-secondary: #163a62;
+$sopp-alternative: #2b6387;
+$sopp-white: #ffffff;
 #qr-code-view-page {
 
-  background-color: $company-color;
+  background-color: $sopp-secondary;
 
   @keyframes fadeIn {
     from {

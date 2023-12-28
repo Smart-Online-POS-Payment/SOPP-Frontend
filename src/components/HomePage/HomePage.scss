@@ -1,6 +1,10 @@
 $company-color: #0067b4;
+$sopp-primary: #5dc9e9;
+$sopp-secondary: #163a62;
+$sopp-alternative: #2b6387;
+$sopp-white: #ffffff;
 #home-page {
-  background-color: antiquewhite;
+  background-color: $sopp-primary;
 
   @keyframes fade-in-out {
     0% {
@@ -78,27 +82,14 @@ $company-color: #0067b4;
     left: 10px;
   }
 
-  .menu button {
-    background-color: antiquewhite;
-  }
-
   .exit-button {
     position: absolute;
     top: 10px;
     right: 10px;
 
-    button {
-      background-color: antiquewhite;
+    button{
+      background-color: $sopp-primary;
     }
-  }
-
-  .dropdown-menu {
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    padding: 12px 16px;
-    z-index: 1000;
   }
 
   .dropdown-menu button {
@@ -115,10 +106,9 @@ $company-color: #0067b4;
     gap: 10px;
 
     button {
-      background-color: $company-color;
+      background-color: $sopp-primary;
       h5 {
-        color: black;
-        
+        color: $sopp-alternative;
       }
     }
   }
@@ -126,8 +116,7 @@ $company-color: #0067b4;
   .card {
     width: 150px;
     height: 200px;
-    background-color: #007bff;
-    //display: inline-block;
+    border: 3px solid $sopp-alternative;
     display: grid;
     transition: transform 0.3s ease;
 
@@ -158,15 +147,14 @@ $company-color: #0067b4;
     display: flex;
     justify-content: space-between;
   }
-  
+
   .nav-list li {
     flex: 1;
     text-align: center;
   }
-  
+
   .nav-list a {
     text-decoration: none;
-    color: white; /* Set your desired text color */
     padding: 10px;
     display: block;
   }
@@ -175,6 +163,4 @@ $company-color: #0067b4;
     background-color: #333; /* Set your desired background color */
     padding: 10px;
   }
-
-  
 }
