@@ -23,25 +23,26 @@ const messaging = getMessaging(app);
 
 const sendDeviceTokenToServer = (token)=>{
   let accessToken = getCookie('sopp-auth')
-  let merchantId = auth.currentUser.uid
-  console.log(accessToken)
-  axios.post(`http://localhost:8070/notification/token/${token}/user/${merchantId}`, {
+  let merchantId = getCookie("userId")
+  console.log("Send device token to service")
+  axios.post(`http://localhost:8084/notification/token/${token}/user/${merchantId}`, {
     headers: {
       'Authorization': 'Bearer ' + accessToken,
       'Content-Type': 'application/json',
     },
+  }).then((response)=>{
+    console.log(response)
   })
 }
 
 export const requestPermission = () => {
   if (getCookie("sopp-auth")!=null && !getCookie("deviceToken")) {
-    console.log("Requesting User Permission......");
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
         console.log("Notification User Permission Granted."); 
         return getToken(messaging, { vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY })
           .then((currentToken) => {
-
+            console.log(currentToken)
             if (currentToken) {
               console.log('Client Token: ', currentToken);
               sendDeviceTokenToServer(currentToken)

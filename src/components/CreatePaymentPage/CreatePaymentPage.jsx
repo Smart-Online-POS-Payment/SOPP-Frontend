@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const CreatePaymentPage = () => {
   const [paymentAmount, setPaymentAmount] = useState(0);
   const [paymentDescription, setPaymentDescription] = useState("");
+  const [category, setCategory]= useState("Other")
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -25,7 +26,7 @@ const CreatePaymentPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let merchantId = auth.currentUser.uid;
+    let merchantId = getCookie("userId");
     let accessToken = getCookie("sopp-auth");
     axios
       .post(
@@ -33,6 +34,7 @@ const CreatePaymentPage = () => {
         {
           merchantId: merchantId,
           paymentAmount: paymentAmount,
+          category: category,
           paymentMessage: paymentDescription,
         },
         {
@@ -81,6 +83,7 @@ const CreatePaymentPage = () => {
                     id="dropdown"
                     name="dropdown"
                     className="form-control form-control-lg"
+                    onChange={(e)=>setCategory(e.target.value)}
                   >
                     <option selected>Choose Category</option>
 

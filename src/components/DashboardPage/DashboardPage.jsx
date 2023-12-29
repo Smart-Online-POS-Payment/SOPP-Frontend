@@ -12,7 +12,7 @@ import transactionsImage from "../DashboardPage/card_images/transaction.png";
 import backButtonImage from "../ProfilePage/src/arrow.png";
 
 function DashboardPage() {
-  const [paymentHistory, setPaymentHistory] = useState([]);
+  const [stats, setStats] = useState(null);
   const [showTextField, setShowTextField] = useState(false);
   // const [clickedRowIndex, setClickedRowIndex] = useState(null);
 
@@ -45,15 +45,32 @@ function DashboardPage() {
     if (!getCookie("sopp-auth")) {
       navigate("/home");
     }
-  }, []);
+    let accessToken = getCookie("sopp-auth");
+    //let merchantId = auth.currentUser.uid
+    const userId = getCookie('userId')
+    let api =
+    `http://localhost:8083/payment/statistics/income/merchant/${userId}/category`
+      ;
 
-  const data = [
-    { value: 1550, label: "Electronics" },
-    { value: 1000, label: "Charity" },
-    { value: 150, label: "Coffee" },
-    { value: 450, label: "Other" },
-    { value: 1000, label: "Gaming" },
-  ];
+    axios
+      .get(api, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.data != null) {
+          console.log(response.data);
+          setStats(response.data);
+
+          console.log(stats)
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching stories:", error);
+      });
+  }, []);
 
   const size = {
     width: 700,
@@ -76,33 +93,6 @@ function DashboardPage() {
     );
   }
 
-  useEffect(() => {
-    let accessToken = getCookie("sopp-auth");
-    //let merchantId = auth.currentUser.uid
-    console.log("user id issss: " + getCookie("userId"));
-    let api =
-      "http://localhost:8083/payment/payment-order/merchant/" +
-      getCookie("userId");
-
-    axios
-      .get(api, {
-        headers: {
-          Authorization: "Bearer " + accessToken,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        if (response.data != null) {
-          console.log(response.data);
-          setPaymentHistory(response.data);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching stories:", error);
-      });
-  }, []);
-
   return (
     <div>
       <div id="dashboard-page">
@@ -118,6 +108,9 @@ function DashboardPage() {
             <div className="row">
               <div className="col-8 d-flex flex-column justify-content-center align-items-center">
                 <div className="pie-chart-container">
+                {!stats ? (
+                  <span>Loading...</span>
+                ):
                   <PieChart
                     colors = {[                      
                       "#ffb74d",
@@ -133,7 +126,7 @@ function DashboardPage() {
                     ]}
                     series={[
                       {
-                        data,
+                        data: stats || [],
                         innerRadius: 80,
                         outerRadius: 200,
                         paddingAngle: 5,
@@ -146,6 +139,7 @@ function DashboardPage() {
                   >
                     <PieCenterLabel>Sales</PieCenterLabel>
                   </PieChart>
+                  }
                 </div>
               </div>
 

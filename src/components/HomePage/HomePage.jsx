@@ -1,45 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCookie, deleteCookie } from "../../cookie-functions";
+import { getCookie, deleteCookie, setCookie } from "../../cookie-functions";
 import { auth } from "../firebase";
 import "./HomePage.scss";
 import getPaymentImage from "../HomePage/card_images/payment-method.png";
 import getProfileImage from "../HomePage/card_images/profile.png";
 import logoutImage from "../HomePage/card_images/logout.png";
-import hamburgerImage from "../HomePage/card_images/hamburger.png";
 import dashboardImage from "../HomePage/card_images/dashboard.png"
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [showWelcome, setShowWelcome] = useState(true);
-  const [firstName, setFirstName] = useState("Test");
-  const [lastName, setLastName] = useState("Test");
+  const [showWelcome, setShowWelcome] = useState(getCookie("show-welcome"));
   const [userName, setUserName] = useState("Test");
 
   useEffect(() => {
     if (!getCookie("sopp-auth")) {
       navigate("/login");
     } else {
+
       let username = getCookie("user-displayName");
       console.log("username: " + username);
       setUserName(username);
-
+      setShowWelcome(false);
       setTimeout(() => {
         setShowWelcome(false);
+        setCookie("show-welcome", false)
       }, 3000);
+      setCookie("greeted", true)
     }
+    
   }, [navigate]);
 
-  const [showMenu, setShowMenu] = useState(false);
 
   const handleCreatePayment = () => {
     navigate("/home/create-payment");
   };
 
-  const handleMenuToggle = () => {
-    setShowMenu(!showMenu);
-    console.log("Menu Toggled", !showMenu); // This will log the new state
-  };
 
   const handleProfile = () => {
     console.log("Profile Clicked"); // Placeholder for profile functionality
@@ -70,16 +66,6 @@ const HomePage = () => {
               <>
                 <div className="main-content">
                   <h1>{userName}'s Dashboard</h1>
-                  {/* <div className="menu">
-                    <button onClick={handleMenuToggle}>
-                      <img src={hamburgerImage} className="image-small"></img>
-                    </button>
-                    {showMenu && (
-                      <div className="dropdown-menu">
-                        <button onClick={handleProfile}>My Profile</button>
-                      </div>
-                    )}
-                  </div> */}
                   <div className="exit-button">
                     <button onClick={handleExit}>
                       <img src={logoutImage} className="image-small"></img>

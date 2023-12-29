@@ -7,6 +7,7 @@ function Notification() {
     requestPermission();
     const unsubscribe = onMessageListener().then((payload) => {
       console.log(payload.data.title)
+      console.log("entered...")
       toast.success(`${payload?.data?.title}: ${payload?.data?.body}`, {
         duration: 50000, 
         position: 'top-right', 
