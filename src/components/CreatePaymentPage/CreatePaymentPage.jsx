@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { getCookie } from "../../cookie-functions";
 import "./CreatePaymentPage.scss";
-import { auth } from "../firebase";
-import downArrow from "../CreatePaymentPage/src/down-arrow.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CreatePaymentPage = () => {
   const [paymentAmount, setPaymentAmount] = useState(0);

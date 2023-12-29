@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ListGroup, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../cookie-functions";
 import "../DashboardPage/DashboardPage.scss";
@@ -13,20 +12,8 @@ import backButtonImage from "../ProfilePage/src/arrow.png";
 
 function DashboardPage() {
   const [stats, setStats] = useState(null);
-  const [showTextField, setShowTextField] = useState(false);
   // const [clickedRowIndex, setClickedRowIndex] = useState(null);
 
-  function toggleDisplayById(id) {
-    const elementId = "text-field-" + id;
-    const element = document.getElementById(elementId);
-    console.log(element);
-
-    if (element) {
-      // Toggle the display attribute
-      element.style.display =
-        element.style.display === "none" ? "block" : "none";
-    }
-  }
 
   const handleBack = () => {
     navigate("/home");

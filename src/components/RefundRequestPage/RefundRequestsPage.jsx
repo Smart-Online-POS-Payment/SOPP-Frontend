@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getCookie, setCookie } from '../../cookie-functions';
-import { auth } from "../firebase";
 import "./RefundRequestsPage.scss"
-import { ListGroup, Button, Form } from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 
 function RefundRequestsPage() {
   function toggleDisplayById(id) {
