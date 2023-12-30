@@ -6,7 +6,6 @@ import { getCookie } from "../../cookie-functions";
 
 function QrCodeView() {
   const data = useParams();
-  //const qrcode = <QRCode value={data.uuid} size={256} className="qrcode" />;
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -20,7 +19,7 @@ function QrCodeView() {
       <div id="qr-code-view-page">
         <div className="container">
           <div className="qrcode-container">
-            <h2 className="title">Make Payment</h2>
+            <h2 className="title">Scan it</h2>
             <div>
               <QRCode value={data.uuid} size={256} className="qrcode" />
             </div>

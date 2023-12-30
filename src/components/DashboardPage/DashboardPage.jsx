@@ -13,7 +13,6 @@ import backButtonImage from "../ProfilePage/src/arrow.png";
 function DashboardPage() {
   const [stats, setStats] = useState(null);
   const [showTextField, setShowTextField] = useState(false);
-  // const [clickedRowIndex, setClickedRowIndex] = useState(null);
 
   const handleBack = () => {
     navigate("/home");
@@ -33,7 +32,6 @@ function DashboardPage() {
       navigate("/home");
     }
     let accessToken = getCookie("sopp-auth");
-    //let merchantId = auth.currentUser.uid
     const userId = getCookie('userId')
     let api =
     `http://localhost:8083/payment/statistics/income/merchant/${userId}/category`
