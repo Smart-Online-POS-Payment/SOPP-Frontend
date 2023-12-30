@@ -3,11 +3,20 @@ import axios from "axios";
 import { ListGroup, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../../cookie-functions";
-import "./PaymentHistoryPage.scss"
+import backButtonImage from "../ProfilePage/src/arrow.png";
+import "./PaymentHistoryPage.scss";
+import moment from "moment";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
 
 function PaymentHistoryPage() {
   const [paymentHistory, setPaymentHistory] = useState([]);
   const [showTextField, setShowTextField] = useState(false);
+  const [selected, setSelected] = useState(null);
+
+  const handleBack = () => {
+    navigate("/home/dashboard");
+  };
 
   function toggleDisplayById(id) {
     const elementId = "text-field-" + id;
@@ -55,55 +64,305 @@ function PaymentHistoryPage() {
       });
   }, []);
 
+  const getRandomNumber = () => {
+    const min = 50;
+    const max = 100;
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    return "Amount: " + Math.floor(randomNumber / 5) * 5;
+  };
+
+  const getCategory = () => {
+    const categories = [
+      "Groceries",
+      "Clothing",
+      "Electronics",
+      "Tickets",
+      "CarRentals",
+      "Restaurants",
+      "Coffee",
+      "Charity",
+      "Rent",
+      "Gaming",
+      "Other",
+    ];
+
+    const randomIndex = Math.floor(Math.random() * categories.length);
+    return "Category: " + categories[randomIndex];
+  };
+
+  const generateMockData = () => {
+    const mockData = [];
+
+    for (let i = 1; i <= 50; i++) {
+      mockData.push([getRandomNumber(), getCategory(), "some-time", "Forgot"]);
+    }
+
+    return mockData;
+  };
+
+  //const mockData = generateMockData();
+  const mockData = [
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+    {
+      amount: "60",
+      category: "electronics",
+      time: "some-time",
+      detail: "some-detail",
+    },
+  ];
+
+  function handleDetail(id) {
+    if (selected === id) {
+      return setSelected(null);
+    }
+    setSelected(id);
+  }
 
   return (
     <div>
       <div id="payment-history-page">
+        <h1>Payment History</h1>
+        <div className="back-button">
+          <button onClick={handleBack}>
+            <img src={backButtonImage} className="image-small"></img>
+          </button>
+        </div>
         <div className="container">
-          <ListGroup style={{ display: "flex", flexDirection: "column" }}>
-            {paymentHistory.map((paymentItem, index) => (
-              <div key={index} style={{ position: "relative" }}>
-                <ListGroup.Item
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                    alignItems: "center",
-                  }}
-                >
-                  {Object.values(paymentItem).map((value, innerIndex) => (
-                    <span key={innerIndex}>
-                      {innerIndex === Object.values(paymentItem).length - 1 ? (
-                        <Button
-                          variant="primary"
-                          onClick={() => toggleDisplayById(index)}
-                        >
-                          Detail: {index}
-                        </Button>
-                      ) : (
-                        value
-                      )}
-                    </span>
-                  ))}
-                </ListGroup.Item>
-  
-                <textarea
-                  id={`text-field-${index}`}
-                  className="form-control form-control-lg"
-                  value={paymentItem.date}
-                  rows="1"
-                  readOnly
-                  style={{
-                    display: "none",
-                  }}
-                ></textarea>
-              </div>
-            ))}
-          </ListGroup>
+          <div className="wrapper">
+            <div className="accordion">
+              {mockData.map((item, i) => (
+                <div className="item">
+                  <div className="list-row">
+                    <span>Category: {item.category}</span>
+                    <span>Amount: {item.amount}</span>
+                    <span>TIme: {item.time}</span>
+                    <Button
+                      onClick={() => handleDetail(i)}
+                      className="list-btn-detail"
+                    >
+                      See Details
+                    </Button>
+                  </div>
+                  <div className={selected === i ? "details show" : "details"}>
+                    {item.detail}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  );  
+  );
 }
 
 export default PaymentHistoryPage;

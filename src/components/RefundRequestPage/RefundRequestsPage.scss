@@ -1,5 +1,40 @@
+$company-color: #0067b4;
+$sopp-primary: #5dc9e9;
+$sopp-secondary: #163a62;
+$sopp-alternative: #2b6387;
+$sopp-white: #ffffff;
 #refund-history-page {
-    padding: 120px;
-    .container{     
+  padding: 80px;
+  background-color: $sopp-primary;
+  .container {
+    text-align: center;
+  }
+
+  .list-btn-refund {
+    margin: 10px;
+  }
+
+  .list-row {
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .image-small {
+    width: 40px;
+    height: auto;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    button {
+      background-color: $sopp-primary;
+      width: 50px;
+      height: 50px;
+      border: none;
     }
+  }
 }

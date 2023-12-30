@@ -1,5 +1,72 @@
+$company-color: #0067b4;
+$sopp-primary: #5dc9e9;
+$sopp-secondary: #163a62;
+$sopp-alternative: #2b6387;
+$sopp-white: #ffffff;
 #payment-history-page {
-    padding: 120px;
-    .container{     
+  padding: 80px;
+  background-color: $sopp-primary;
+  min-height: 100vh;
+  text-align: center;
+
+  .list-btn-detail {
+    margin: 10px;
+  }
+
+  .item {
+    background-color: $sopp-white;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 10px 20px;
+  }
+
+  .list-row {
+    border-radius: 8px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+  .details {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+  }
+
+  .details.show {
+    height: auto;
+    max-height: 9999px;
+    transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+  }
+
+  .image-small {
+    width: 40px;
+    height: auto;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    button {
+      background-color: $sopp-primary;
+      width: 50px;
+      height: 50px;
+      border: none;
     }
+  }
+
+  .list-btn-detail{
+    background-color: $sopp-primary;
+    border-color: $sopp-primary;
+  }
+
+  .list-btn-detail:hover {
+    background-color: $sopp-white;
+    color: $sopp-primary;
+  }
 }
