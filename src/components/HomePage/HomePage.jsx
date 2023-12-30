@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCookie, deleteCookie, setCookie } from "../../cookie-functions";
-import { auth } from "../firebase";
 import "./HomePage.scss";
 import getPaymentImage from "../HomePage/card_images/payment-method.png";
 import getProfileImage from "../HomePage/card_images/profile.png";
@@ -21,7 +20,6 @@ const HomePage = () => {
       let username = getCookie("user-displayName");
       console.log("username: " + username);
       setUserName(username);
-      setShowWelcome(false);
       setTimeout(() => {
         setShowWelcome(false);
         setCookie("show-welcome", false)
@@ -29,7 +27,7 @@ const HomePage = () => {
       setCookie("greeted", true)
     }
     
-  }, [navigate]);
+  }, []);
 
 
   const handleCreatePayment = () => {

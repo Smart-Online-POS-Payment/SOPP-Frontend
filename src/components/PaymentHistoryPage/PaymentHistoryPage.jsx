@@ -339,12 +339,12 @@ function PaymentHistoryPage() {
         <div className="container">
           <div className="wrapper">
             <div className="accordion">
-              {mockData.map((item, i) => (
+              {paymentHistory.map((item, i) => (
                 <div className="item">
                   <div className="list-row">
                     <span>Category: {item.category}</span>
                     <span>Amount: {item.amount}</span>
-                    <span>TIme: {item.time}</span>
+                    <span>Message: {item.description}</span>
                     <Button
                       onClick={() => handleDetail(i)}
                       className="list-btn-detail"
@@ -353,7 +353,7 @@ function PaymentHistoryPage() {
                     </Button>
                   </div>
                   <div className={selected === i ? "details show" : "details"}>
-                    {item.detail}
+                    {item.date}
                   </div>
                 </div>
               ))}

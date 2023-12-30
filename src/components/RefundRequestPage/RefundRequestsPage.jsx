@@ -8,24 +8,26 @@ import backButtonImage from "../ProfilePage/src/arrow.png";
 
 function RefundRequestsPage() {
   function handleRefund(id) {
-    console.log("Refund clicked for item: " + id);
+    let accessToken = getCookie("sopp-auth");
+    axios.put(`http://localhost:8083/payment/refund/${paymentHistory[id].transactionId}`,
+    {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        // Refresh the page upon successful response
+        window.location.reload();
+      } else {
+        // Handle other success status codes if needed
+        alert("Refund request failed. Please try again.");
+      }    })
+    .catch((error) => {
+      console.error("Error fetching stories:", error);
+    });
   }
 
-  function toggleDisplayById(id) {
-    const elementId = "text-field-" + id;
-    const element = document.getElementById(elementId);
-    console.log(element);
-
-    if (element) {
-      // Toggle the display attribute
-      element.style.display =
-        element.style.display === "none" ? "block" : "none";
-
-      if (element) {
-        element.classList.add("row-detail-visible");
-      }
-    }
-  }
   const [paymentHistory, setPaymentHistory] = useState([]);
 
   const navigate = useNavigate();
@@ -107,58 +109,34 @@ function RefundRequestsPage() {
 
   return (
     <div>
-      <div id="refund-history-page">
-        <div className="back-button">
+      <div id="payment-history-page">
+      <h1>Refund Requests</h1>
+
+      <div className="back-button">
           <button onClick={handleBack}>
             <img src={backButtonImage} className="image-small"></img>
           </button>
         </div>
         <div className="container">
-          <h1>Refund Requests</h1>
-          <ListGroup style={{ display: "flex", flexDirection: "column" }}>
-            {mockData.map((innerArray, outerIndex) => (
-              <div key={outerIndex} style={{ position: "relative" }}>
-                <ListGroup.Item
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                    alignItems: "center",
-                  }}
-                  className="list-row"
-                >
-                  {innerArray.map((str, innerIndex) => (
-                    <span key={innerIndex}>
-                      {innerIndex === innerArray.length - 1 ? (
-                        <div>
-                          <Button
-                            variant="secondary"
-                            onClick={() => handleRefund(outerIndex)}
-                            className="list-btn-refund"
-                          >
-                            Complete Refund
-                          </Button>
-                        </div>
-                      ) : (
-                        str
-                      )}
-                    </span>
-                  ))}
-                </ListGroup.Item>
-
-                <textarea
-                  id={`text-field-${outerIndex}`}
-                  className="form-control form-control-lg row-detail"
-                  value={"Mock detail for mock item no: " + outerIndex}
-                  rows="1"
-                  readOnly
-                  style={{
-                    display: "none",
-                  }}
-                ></textarea>
-              </div>
-            ))}
-          </ListGroup>
+          <div className="wrapper">
+            <div className="accordion">
+              {paymentHistory.map((item, i) => (
+                <div className="item">
+                  <div className="list-row">
+                    <span>Category: {item.category}</span>
+                    <span>Amount: {item.amount}</span>
+                    <span>CustomerId: {item.customerId}</span>
+                    <Button
+                      onClick={() => handleRefund(i)}
+                      className="list-btn-detail"
+                    >
+                      Make refund
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

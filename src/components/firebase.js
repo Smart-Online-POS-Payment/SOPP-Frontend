@@ -25,14 +25,14 @@ const sendDeviceTokenToServer = (token)=>{
   let accessToken = getCookie('sopp-auth')
   let merchantId = getCookie("userId")
   console.log("Send device token to service")
-  axios.post(`http://localhost:8084/notification/token/${token}/user/${merchantId}`, {
+ /* axios.post(`http://localhost:8070/notification/token/${token}/user/${merchantId}`, {
     headers: {
       'Authorization': 'Bearer ' + accessToken,
       'Content-Type': 'application/json',
     },
   }).then((response)=>{
     console.log(response)
-  })
+  })*/
 }
 
 export const requestPermission = () => {
@@ -44,7 +44,6 @@ export const requestPermission = () => {
           .then((currentToken) => {
             console.log(currentToken)
             if (currentToken) {
-              console.log('Client Token: ', currentToken);
               sendDeviceTokenToServer(currentToken)
             } else {
               

@@ -12,8 +12,8 @@ import backButtonImage from "../ProfilePage/src/arrow.png";
 
 function DashboardPage() {
   const [stats, setStats] = useState(null);
+  const [showTextField, setShowTextField] = useState(false);
   // const [clickedRowIndex, setClickedRowIndex] = useState(null);
-
 
   const handleBack = () => {
     navigate("/home");

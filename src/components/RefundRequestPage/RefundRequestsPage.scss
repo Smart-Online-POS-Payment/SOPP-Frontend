@@ -3,21 +3,43 @@ $sopp-primary: #5dc9e9;
 $sopp-secondary: #163a62;
 $sopp-alternative: #2b6387;
 $sopp-white: #ffffff;
-#refund-history-page {
+#payment-history-page {
   padding: 80px;
   background-color: $sopp-primary;
-  .container {
-    text-align: center;
+  min-height: 100vh;
+  text-align: center;
+
+  .list-btn-detail {
+    margin: 10px;
   }
 
-  .list-btn-refund {
-    margin: 10px;
+  .item {
+    background-color: $sopp-white;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 10px 20px;
   }
 
   .list-row {
     border-radius: 8px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+  .details {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+  }
+
+  .details.show {
+    height: auto;
+    max-height: 9999px;
+    transition: all 0.5s cubic-bezier(1, 0, 1, 0);
   }
 
   .image-small {
@@ -36,5 +58,15 @@ $sopp-white: #ffffff;
       height: 50px;
       border: none;
     }
+  }
+
+  .list-btn-detail{
+    background-color: $sopp-primary;
+    border-color: $sopp-primary;
+  }
+
+  .list-btn-detail:hover {
+    background-color: $sopp-white;
+    color: $sopp-primary;
   }
 }
