@@ -9,7 +9,7 @@ import backButtonImage from "../ProfilePage/src/arrow.png";
 function RefundRequestsPage() {
   function handleRefund(id) {
     let accessToken = getCookie("sopp-auth");
-    axios.put(`http://localhost:8083/payment/refund/${paymentHistory[id].transactionId}`,
+    axios.put(`http://34.135.253.130:80/payment/refund/${paymentHistory[id].transactionId}`,
     {
       headers: {
         Authorization: "Bearer " + accessToken,
@@ -45,7 +45,7 @@ function RefundRequestsPage() {
     console.log(accessToken);
     axios
       .get(
-        `http://localhost:8083/payment/refund/request/merchant/${merchantId}`,
+        `http://34.41.35.12:80/payment/refund/request/merchant/${merchantId}`,
         {
           headers: {
             Authorization: "Bearer " + accessToken,

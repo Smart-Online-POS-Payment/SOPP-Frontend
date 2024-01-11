@@ -34,7 +34,7 @@ function DashboardPage() {
     let accessToken = getCookie("sopp-auth");
     const userId = getCookie('userId')
     let api =
-    `http://localhost:8083/payment/statistics/income/merchant/${userId}/category`
+    `http://34.135.253.130:80/payment/statistics/income/merchant/${userId}/category`
       ;
 
     axios

@@ -27,7 +27,7 @@ const CreatePaymentPage = () => {
     let accessToken = getCookie("sopp-auth");
     axios
       .post(
-        "http://localhost:8083/payment/payment-request",
+        "http://34.135.253.130:80/payment/payment-request",
         {
           merchantId: merchantId,
           paymentAmount: paymentAmount,

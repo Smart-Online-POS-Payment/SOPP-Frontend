@@ -42,7 +42,7 @@ function PaymentHistoryPage() {
     //let merchantId = auth.currentUser.uid
     console.log("user id issss: " + getCookie("userId"));
     let api =
-      "http://localhost:8083/payment/payment-order/merchant/" +
+      "http://34.135.253.130:80/payment/payment-order/merchant/" +
       getCookie("userId");
 
     axios

@@ -23,9 +23,14 @@ const ProfilePage = () => {
     console.log(auth.currentUser);
     let merchantId = getCookie("userId");
     console.log(accessToken);
-    let apiURL = `http://localhost:8081/verify/customer/${merchantId}`;
+    let apiURL = `http://34.135.253.130:80/verify/customer/${merchantId}`;
     axios
-      .get(apiURL)
+      .get(apiURL,{
+        headers: {
+          Authorization: "Bearer " + accessToken,
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
         console.log(response.data);
         if (response.data != null) {
