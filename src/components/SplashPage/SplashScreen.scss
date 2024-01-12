@@ -1,0 +1,14 @@
+.splash-screen {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #5ecbe9, #143860);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .splash-image {
+    max-width: 75%;
+    max-height: 75%;
+  }

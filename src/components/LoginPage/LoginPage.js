@@ -5,10 +5,16 @@ import { signInWithEmailAndPassword} from "firebase/auth";
 import { auth } from "../firebase";
 import { setCookie, getCookie } from "../../cookie-functions";
 import { useNavigate } from "react-router-dom";
+import SplashScreen from "../SplashPage/SplashScreen";
 
 const LoginPage = () => {
+  const [showLogin, setShowLogin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSplashFinish = () => {
+    setShowLogin(true);
+  };
 
   const navigate = useNavigate();
         useEffect(() => {
@@ -47,6 +53,8 @@ const LoginPage = () => {
 
   return (
     <div>
+      {!showLogin && <SplashScreen onFinish={handleSplashFinish} />}
+      {showLogin && (
       <div class="container-fluid" id="login-page">
         <div class="row">
           <div class="col-4 d-flex flex-column justify-content-center align-items-center">
@@ -94,12 +102,12 @@ const LoginPage = () => {
           <div class="col-8 sopp-color d-flex flex-column justify-content-center align-items-center">
             <div class="sopp-header">
               <h1>SOPP: Smart Online POS Payment</h1>
-              <h3>Making Online Payment Easier</h3>
-              <a href="#details">Learn More about SOPP</a>
+              <h3>Making Online Payment Easier</h3>              
             </div>
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 };
