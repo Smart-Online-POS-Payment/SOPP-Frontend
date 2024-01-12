@@ -76,4 +76,12 @@ $sopp-white: #ffffff;
   .card:hover {
     transform: scale(1.1);
   }
+
+  .pie-chart-title{
+    position: absolute;
+    font-size: 200%;
+    left: 16%;
+    top: 10%;
+    color: $sopp-alternative;
+  }
 }

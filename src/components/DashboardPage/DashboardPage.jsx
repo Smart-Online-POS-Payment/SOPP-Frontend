@@ -86,12 +86,10 @@ function DashboardPage() {
             <img src={backButtonImage} className="image-small"></img>
           </button>
         </div>
-        
-          {/* <h1>Dashboard</h1> */}
-
           <div className="container-fluid">
             <div className="row">
               <div className="col-8 d-flex flex-column justify-content-center align-items-center">
+                <h2 className="pie-chart-title">Distribution of Endorsements</h2>
                 <div className="pie-chart-container">
                 {!stats ? (
                   <span>Loading...</span>

@@ -6,11 +6,21 @@ import getPaymentImage from "../HomePage/card_images/payment-method.png";
 import getProfileImage from "../HomePage/card_images/profile.png";
 import logoutImage from "../HomePage/card_images/logout.png";
 import dashboardImage from "../HomePage/card_images/dashboard.png"
+import axios from 'axios';
+
 
 const HomePage = () => {
+
+  const parseBoolean = (value) => {
+    return value === "true";
+  };
+
   const navigate = useNavigate();
-  const [showWelcome, setShowWelcome] = useState(getCookie("show-welcome"));
+  const [balance, setBalance] = useState(null);
+  const [showWelcome, setShowWelcome] = useState(parseBoolean(getCookie("show-welcome")));
   const [userName, setUserName] = useState("Test");
+
+  
 
   useEffect(() => {
     if (!getCookie("sopp-auth")) {
@@ -18,17 +28,40 @@ const HomePage = () => {
     } else {
 
       let username = getCookie("user-displayName");
+      let accessToken = getCookie("sopp-auth");
+      const userId = getCookie('userId');
+      let api = "http://34.135.253.130:80/wallet/" + userId;
+      console.log("user id:"+userId);
+
+      axios.get(api, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => {
+        // handle response
+        console.log(response)
+        setBalance(response.data.balance);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        console.log('Axios config:', error.config);
+      });
+
       console.log("username: " + username);
       setUserName(username);
       setTimeout(() => {
         setShowWelcome(false);
-        setCookie("show-welcome", false)
+        setCookie("show-welcome", "false");
       }, 3000);
-      setCookie("greeted", true)
+      // setCookie("greeted", true)
     }
     
   }, []);
 
+  
+    
 
   const handleCreatePayment = () => {
     navigate("/home/create-payment");
@@ -63,7 +96,8 @@ const HomePage = () => {
             {!showWelcome && (
               <>
                 <div className="main-content">
-                  <h1>{userName}'s Dashboard</h1>
+                  <div className="username-sign">{userName}'s Dashboard</div>                  
+                  <div className="balance-sign">Balance: {balance !== null ? `₺${balance}` : 'Loading...'}</div>
                   <div className="exit-button">
                     <button onClick={handleExit}>
                       <img src={logoutImage} className="image-small"></img>

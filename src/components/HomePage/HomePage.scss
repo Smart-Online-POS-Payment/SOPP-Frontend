@@ -44,6 +44,7 @@ $sopp-white: #ffffff;
   }
 
   .main-content {
+    text-align: center;
     opacity: 0;
     animation: fade-in 1s forwards;
     z-index: 1;
@@ -60,10 +61,6 @@ $sopp-white: #ffffff;
   .main-screen {
     text-align: center;
     padding: 20px;
-  }
-
-  .main-screen h1 {
-    margin-bottom: 20px;
   }
 
   button {
@@ -87,7 +84,7 @@ $sopp-white: #ffffff;
     top: 10px;
     right: 10px;
 
-    button{
+    button {
       background-color: $sopp-primary;
     }
   }
@@ -104,6 +101,9 @@ $sopp-white: #ffffff;
   .cards {
     display: flex;
     gap: 10px;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    margin-top: 10px;
 
     button {
       background-color: $sopp-primary;
@@ -162,5 +162,16 @@ $sopp-white: #ffffff;
   .navbar {
     background-color: #333; /* Set your desired background color */
     padding: 10px;
+  }
+
+  .username-sign {
+    text-align: center;
+    font-size: 40px;
+    margin: 0;
+  }
+
+  .balance-sign {
+    font-weight: bold;
+    margin: 0;
   }
 }
